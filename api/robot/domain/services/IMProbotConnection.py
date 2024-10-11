@@ -1,7 +1,7 @@
 from pyniryo import *  # Importa la librería que usas para manejar el robot.
-from application.interfaces import RobotConnection
+from api.robot.domain.ports.output.IrobotConection import RobotConnection
 
-class RobotConnectIP(RobotConnection):
+class RobotConnectionIP(RobotConnection):
     
     def __init__(self):
         self.robot = None
@@ -21,4 +21,3 @@ class RobotConnectIP(RobotConnection):
         """desconectar el robot"""
 
         self.robot.end()
-

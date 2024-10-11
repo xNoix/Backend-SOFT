@@ -1,7 +1,9 @@
-from application.interfaces import RobotHandler, RobotConnection
+from api.robot.domain.ports.output.IrobotHandler import RobotHandler
+from api.robot.domain.ports.output.IrobotConection import RobotConnection
+from api.robot.domain.ports.input.IrobotService import RobotService
 
 # core/robot_service.py
-class RobotService:
+class RobotService(RobotService):
     def __init__(self, handler: RobotHandler):
         self.handler = handler #es la implementacion del robot
         self.tope = 30 #ejemplo

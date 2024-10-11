@@ -1,7 +1,7 @@
 from pyniryo import *  # Importa la librería que usas para manejar el robot.
-from application.interfaces import RobotHandler
+from api.robot.domain.ports.output.IrobotHandler import RobotHandler
 
-class RobotHandlerImpl(RobotHandler):
+class IMPRobotHandler(RobotHandler):
     
     def __init__(self, robot_pointer):
         self.robot = robot_pointer
