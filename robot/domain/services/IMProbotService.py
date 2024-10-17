@@ -28,11 +28,15 @@ class RobotService_imp(RobotService):
 
         #si falla:
         #return [] vacio
+        fallo = False
+        if fallo:
+            return []
+        else:
         
-        self.handler.moveJoints(posiciones)
-        current_pos = self.handler.obtenerPos()
-        print(f"Robot movido a {current_pos}")
-        return current_pos
+            self.handler.moveJoints(posiciones)
+            current_pos = self.handler.obtenerPos()
+            print(f"[joint] Robot movido a {current_pos}")
+            return current_pos
 
 
     def move_pose(self, posiciones: dict):
@@ -44,7 +48,7 @@ class RobotService_imp(RobotService):
         
         self.handler.movePose(posiciones)
         current_pos = self.handler.obtenerPos()
-        print(f"Robot movido a {current_pos}")
+        print(f"[pose] Robot movido a {current_pos}")
         return current_pos
 
     def obtener_pos(self):

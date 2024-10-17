@@ -36,7 +36,7 @@ def get_robot_access(request):
 """SOLO SI SE TIENE ACCESO AL ROBOT
 EN UN PRINCIPIO NO DEBERIA PODER LLAMARSE A ESTAS VISTAS SI NO SE HA CONCEDIDO ACCESO"""
 @csrf_exempt  # Django requiere protección CSRF para solicitudes POST; puedes deshabilitarlo para probar.
-def move_robot(request):
+def move_robot_joints(request):
     if request.method == "POST":
         try:
             body = json.loads(request.body)  # Convertir el cuerpo de la solicitud a un diccionario Python
@@ -54,13 +54,74 @@ def move_robot(request):
             # Llamar al método con la lista de radianes
             current_pos = robot_service.move_joints(joint_positions)
 
-            if current_pos != []:
-                return JsonResponse({"message": "Robot moved successfully"}) #retornar el current_pos
+            # Si no ha habido errores, se mandará la respuesta
+            if current_pos != [] and current_pos != None:
+                pos_joints = {'j1': current_pos[0][0],
+                            'j2': current_pos[0][1],
+                            'j3': current_pos[0][2],
+                            'j4': current_pos[0][3],
+                            'j5': current_pos[0][4],
+                            'j6': current_pos[0][5]}
+                pos_pose = {'p1': current_pos[1][0],
+                            'p2': current_pos[1][1],
+                            'p3': current_pos[1][2],
+                            'p4': current_pos[1][3],
+                            'p5': current_pos[1][4],
+                            'p6': current_pos[1][5]}
+                cur_pos = {'current_joints': pos_joints,
+                        'current_pose': pos_pose}
+
+            
+                return JsonResponse(cur_pos) #retornar el current_pos
             else:
                 return JsonResponse({"error": "Failed to move the robot"}, status=400)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
     else:
         return HttpResponse(status=405)  # Método no permitido
-    
-robot_service.move_joints(['1','2','3','4','5','6'])
+
+
+@csrf_exempt  # Django requiere protección CSRF para solicitudes POST; puedes deshabilitarlo para probar.
+def move_robot_pose(request):
+    if request.method == "POST":
+        try:
+            body = json.loads(request.body)  # Convertir el cuerpo de la solicitud a un diccionario Python
+            
+            # Crear una lista con los valores de las articulaciones
+            pose_positions = [
+                body["pose_1"],
+                body["pose_2"],
+                body["pose_3"],
+                body["pose_4"],
+                body["pose_5"],
+                body["pose_6"]
+            ]
+            
+            # Llamar al método con la lista de radianes
+            current_pos = robot_service.move_pose(pose_positions)
+
+            # Si no ha habido errores, se mandará la respuesta
+            if current_pos != [] and current_pos != None:
+                pos_joints = {'j1': current_pos[0][0],
+                            'j2': current_pos[0][1],
+                            'j3': current_pos[0][2],
+                            'j4': current_pos[0][3],
+                            'j5': current_pos[0][4],
+                            'j6': current_pos[0][5]}
+                pos_pose = {'p1': current_pos[1][0],
+                            'p2': current_pos[1][1],
+                            'p3': current_pos[1][2],
+                            'p4': current_pos[1][3],
+                            'p5': current_pos[1][4],
+                            'p6': current_pos[1][5]}
+                cur_pos = {'current_joints': pos_joints,
+                        'current_pose': pos_pose}
+
+            
+                return JsonResponse(cur_pos) #retornar el current_pos
+            else:
+                return JsonResponse({"error": "Failed to move the robot"}, status=400)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+    else:
+        return HttpResponse(status=405)  # Método no permitido

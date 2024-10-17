@@ -11,16 +11,16 @@ class RobotPuntero():
         pass
 
     def move_joints(self, posiciones: dict):
-        pass
+        print("NiryoTest: move_joints")
 
     def move_pose(self, posiciones: dict):
-        pass
+        print("NiryoTest: move_pose")
 
     def get_joints(self):
-        return ['j1', 'j2', 'j3', 'j4', 'j5', 'j6']
+        return ['joint1', 'j2', 'j3', 'j4', 'j5', 'j6']
 
     def get_pose(self):
-        return ['p1', 'p2', 'p3', 'p4', 'p5', 'p6']
+        return ['p1', 'p2', 'pose3', 'p4', 'p5', 'p6']
     
     def close_connection(self):
         pass

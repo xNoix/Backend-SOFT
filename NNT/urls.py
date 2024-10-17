@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from robot.host.rest.robot_controller import get_robot_connection_info, move_robot_joints, move_robot_pose
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('robot/connection/', get_robot_connection_info, name='get_robot_connection_info'),
+    path('robot/move_joints/', move_robot_joints, name='move_robot_joints'),
+    path('robot/move_pose/', move_robot_pose, name='move_robot_pose'),
 ]
