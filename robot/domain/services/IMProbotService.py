@@ -19,7 +19,7 @@ class RobotService_imp(RobotService):
         self.Rconnection.desconectar()
         
 
-    def move_joints(self, posiciones: dict):
+    def move_joints(self, posiciones: dict): #devuelve ambas posiciones
         
         #codigo para comprobaciones antes de mandar el comando
 
@@ -34,12 +34,12 @@ class RobotService_imp(RobotService):
         else:
         
             self.handler.moveJoints(posiciones)
-            current_pos = self.handler.obtenerPos()
+            current_pos = self.obtener_pos_both() # [current_joints, current_pose]
             print(f"[joint] Robot movido a {current_pos}")
             return current_pos
 
 
-    def move_pose(self, posiciones: dict):
+    def move_pose(self, posiciones: dict): #devuelve ambas posiciones
         
         #codigo para comprobaciones antes de mandar el comando
 
@@ -47,10 +47,12 @@ class RobotService_imp(RobotService):
         #mandar comando al 
         
         self.handler.movePose(posiciones)
-        current_pos = self.handler.obtenerPos()
+        current_pos = self.obtener_pos_both() # [current_joints, current_pose]
         print(f"[pose] Robot movido a {current_pos}")
         return current_pos
 
-    def obtener_pos(self):
-        current_pos = self.handler.obtenerPos()
-        return current_pos
+    def obtener_pos_both(self):
+        current_joints = self.handler.getJoints()
+        current_pose = self.handler.getPose()
+        return [current_joints, current_pose]
+    

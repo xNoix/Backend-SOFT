@@ -28,6 +28,6 @@ class RobotService(ABC): #Interfaz para la conexión del robot
         pass
 
     @abstractmethod
-    def obtener_pos(self):
+    def obtener_pos_both(self):
         """Obtiene las posiciones actuales del robot"""
         pass

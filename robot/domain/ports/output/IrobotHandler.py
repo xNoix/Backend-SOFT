@@ -22,4 +22,14 @@ class RobotHandler(ABC): #Interfaz para el manejo del robot
         """obtiene la posicion en radianes y xyz"""
         pass
 
+    @abstractmethod
+    def getJoints(self) -> list[float]:
+        pass
+
+    @abstractmethod
+    def getPose(self) -> list[float]:
+        pass
+
+
+
 

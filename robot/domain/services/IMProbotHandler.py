@@ -24,9 +24,20 @@ class IMPRobotHandler(RobotHandler):
         else:
             raise Exception("No conectado al robot.")
 
-    def obtenerPos(self):
+    def obtenerPos(self): #podría descartarlo para utilizar ambos por separados y dejarle la decisión al servicio
         """Devuelve un diccionario de la posicion [rad,xyz]"""
         joints_read = self.robot.get_joints()
-        pose_read = self.robot.get_pose()
+        pose_read = self.robot.get_pose().to_list()
 
         return [joints_read, pose_read]
+    
+
+    def getJoints(self) -> list[float]:
+        """devuelve diccionario de radianes de los joints [floats]"""
+        joints_read = self.robot.get_joints()
+        return joints_read
+
+    def getPose(self) -> list[float]:
+        """get.pose() devuelve poseObject de las posiciones -> usar .to_list() para entregar lista de floats"""
+        pose_read = self.robot.get_pose().to_list()
+        return pose_read
