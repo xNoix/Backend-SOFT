@@ -17,3 +17,13 @@ class SecuenciaMovimiento(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+
+class RobotDatos(models.Model):
+    nombre = models.CharField(max_length=100, unique=True) #Nombre del robot
+    ip = models.GenericIPAddressField(protocol='IPv4', unique=True) # Ip del robot
+    minH = models.DecimalField(max_digits=5, decimal_places=4) #Altura minima del robot en pose
+    minmaxJoints = models.JSONField() # valores minimos y maximos para los ejes
+
+    def __str__(self):
+        return self.nombre
