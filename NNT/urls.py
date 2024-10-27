@@ -17,10 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from robot.host.rest.robot_controller import get_robot_connection_info, move_robot_joints, move_robot_pose
+from robot.host.rest.secuencias_controller import crear_secuencia, get_all_secuencias, delete_secuencia, get_secuencia
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('robot/connection/', get_robot_connection_info, name='get_robot_connection_info'),
     path('robot/move_joints/', move_robot_joints, name='move_robot_joints'),
     path('robot/move_pose/', move_robot_pose, name='move_robot_pose'),
+    path('robot/crear_secuencia/', crear_secuencia, name='crear_secuencia'),
+    path('robot/get_all_secuencias/', get_all_secuencias, name='get_all_secuencias'),
+    path('robot/delete_secuencia/', delete_secuencia, name='delete_secuencia'),
+    path('robot/get_secuencia/', get_secuencia, name='get_secuencia'),
 ]

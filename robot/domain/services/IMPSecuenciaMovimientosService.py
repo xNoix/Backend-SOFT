@@ -62,14 +62,14 @@ class SecuenciaMovimientoService:
         return self.repository.create(titulo, tipo, movimientos)
 
 
-    def get_all_secuencias(self):
+    def get_all_secuencias(self): #listo
         return self.repository.get_all()
 
-    def get_secuencia(self, id):
+    def get_secuencia(self, id): #listo
         return self.repository.get_by_id(id)
 
     def update_secuencia(self, id, **kwargs):
         return self.repository.update(id, **kwargs)
 
-    def delete_secuencia(self, id):
+    def delete_secuencia(self, id): #listo
         return self.repository.delete(id)

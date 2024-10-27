@@ -37,7 +37,7 @@ class SecuenciaMovimientoRepository:
             #privado=privado
         )
         secuencia.save()
-        return secuencia
+        return ("Secuencia creada con éxito")
 
     @transaction.atomic
     def update(self, id, **kwargs): #no revisado aun
@@ -50,7 +50,8 @@ class SecuenciaMovimientoRepository:
 
     @transaction.atomic
     def delete(self, id):
-        secuencia = self.get_by_id(id)
+        secuencia = SecuenciaMovimiento.objects.get(id=id)
         if secuencia:
+            print("eliminar")
             secuencia.delete()
-        return secuencia
+        return ("Secuencia eliminada con exito")
